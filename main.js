@@ -632,6 +632,9 @@ app.get('/run-scraper', async (req, res) => {
         res.send('✅ Scraping completado. Revisa logs y base de datos.');
     } catch (error) {
         log.error('❌ Error ejecutando el scraper vía web:', error);
+        if (error && error.stack) {
+            console.error(error.stack);
+        }
         res.status(500).send('❌ Error ejecutando el scraper. Revisa logs.');
     }
 });
