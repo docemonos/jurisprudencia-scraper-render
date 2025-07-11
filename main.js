@@ -615,28 +615,30 @@ class JurisprudenciaScraper {
     }
 }
 
-/**
- * Función principal para Render.com
- */
-async function main() {
-    log.info('🚀 Iniciando scraper de jurisprudencia para Render.com');
-    
+// --- INICIO SERVIDOR EXPRESS PARA RENDER WEB SERVICE ---
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.send('🟢 Scraper de Jurisprudencia listo. Usa /run-scraper para ejecutar.');
+});
+
+app.get('/run-scraper', async (req, res) => {
+    log.info('🔔 Solicitud recibida en /run-scraper');
     try {
         const scraper = new JurisprudenciaScraper();
         await scraper.run();
-        
-        log.info('✅ Scraper completado exitosamente');
-        process.exit(0);
-        
+        res.send('✅ Scraping completado. Revisa logs y base de datos.');
     } catch (error) {
-        log.error('❌ Error fatal en el scraper:', error);
-        process.exit(1);
+        log.error('❌ Error ejecutando el scraper vía web:', error);
+        res.status(500).send('❌ Error ejecutando el scraper. Revisa logs.');
     }
-}
+});
 
-// Ejecutar si es el archivo principal
-if (require.main === module) {
-    main();
-}
-
-module.exports = JurisprudenciaScraper; 
+// Solo iniciar el servidor si está en modo Web Service
+if (process.env.RENDER_WEB_SERVICE === 'true' || process.env.WEB_SERVICE === 'true') {
+    app.listen(PORT, () => {
+        log.info(`🌐 Web Service escuchando en puerto ${PORT}`);
+    });
+} 
