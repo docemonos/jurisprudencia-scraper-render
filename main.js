@@ -636,8 +636,8 @@ app.get('/run-scraper', async (req, res) => {
     }
 });
 
-// Solo iniciar el servidor si está en modo Web Service
-if (process.env.RENDER_WEB_SERVICE === 'true' || process.env.WEB_SERVICE === 'true') {
+// Solo iniciar el servidor si es el archivo principal
+if (require.main === module) {
     app.listen(PORT, () => {
         log.info(`🌐 Web Service escuchando en puerto ${PORT}`);
     });
