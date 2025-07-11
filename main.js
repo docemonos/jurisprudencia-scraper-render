@@ -620,6 +620,14 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Manejo global de errores para debug en Render
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('UNHANDLED REJECTION:', reason);
+});
+process.on('uncaughtException', (err) => {
+    console.error('UNCAUGHT EXCEPTION:', err);
+});
+
 app.get('/', (req, res) => {
     res.send('🟢 Scraper de Jurisprudencia listo. Usa /run-scraper para ejecutar.');
 });
@@ -631,10 +639,14 @@ app.get('/run-scraper', async (req, res) => {
         await scraper.run();
         res.send('✅ Scraping completado. Revisa logs y base de datos.');
     } catch (error) {
-        log.error('❌ Error ejecutando el scraper vía web:', error);
+        log.error('❌ Error ejecutando el scraper vía web:');
         if (error && error.stack) {
-            console.error(error.stack);
+            console.error('STACK:', error.stack);
         }
+        if (error && error.message) {
+            console.error('MESSAGE:', error.message);
+        }
+        console.error('RAW ERROR:', error);
         res.status(500).send('❌ Error ejecutando el scraper. Revisa logs.');
     }
 });
