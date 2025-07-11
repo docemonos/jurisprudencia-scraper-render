@@ -31,7 +31,7 @@
     "node-html-parser": "^6.1.11",
     "openai": "^4.20.1",
     "pdf-parse": "^1.1.1",
-    "puppeteer": "^19.11.1",
+    "puppeteer": "^22.15.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
