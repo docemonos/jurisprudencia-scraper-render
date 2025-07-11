@@ -1,0 +1,26 @@
+services:
+  - type: background
+    name: jurisprudencia-scraper
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRIBUNAL
+        value: Corte_Suprema
+      - key: MAX_SENTENCIAS
+        value: 100
+      - key: DELAY_BETWEEN_REQUESTS
+        value: 2000
+      - key: DEBUG
+        value: false
+      - key: ENABLE_EMBEDDINGS
+        value: true
+    # Variables que deben configurarse manualmente en Render:
+    # - SUPABASE_URL
+    # - SUPABASE_ANON_KEY
+    # - OPENAI_API_KEY
+    # - START_DATE
+    # - END_DATE
+    # - SEARCH_TERM 

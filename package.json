@@ -1,0 +1,46 @@
+{
+  "name": "jurisprudencia-scraper",
+  "version": "1.0.0",
+  "description": "Scraper de jurisprudencia chilena desde juris.pjud.cl para almacenar en Supabase",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js",
+    "test": "jest",
+    "test-config": "node test.js"
+  },
+  "keywords": [
+    "scraper",
+    "jurisprudencia",
+    "poder-judicial",
+    "chile",
+    "supabase",
+    "render"
+  ],
+  "author": "RedJudicial",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^19.11.1",
+    "cheerio": "^1.0.0-rc.12",
+    "@supabase/supabase-js": "^2.38.4",
+    "openai": "^4.20.1",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2",
+    "moment": "^2.29.4",
+    "lodash": "^4.17.21",
+    "pdf-parse": "^1.1.1",
+    "node-html-parser": "^6.1.11",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docemonos/redjudicial-main"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+} 
